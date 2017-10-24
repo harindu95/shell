@@ -1,4 +1,3 @@
-
 from PyQt4 import QtGui,QtCore
 class FlowLayout(QtGui.QLayout):
     def __init__(self, parent=None, margin=0, spacing=-1):

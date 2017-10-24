@@ -34,7 +34,7 @@ class MyWidget(QWidget):
         widHeight = self.height()
         self.pixmap = self.pixmap.scaled(widWidth, widHeight, Qt.KeepAspectRatioByExpanding)
         paint.drawPixmap(0, 0, self.pixmap)
- 
+        
 w = MyWidget()
 panel = w
 # Set window size.
@@ -59,13 +59,13 @@ for app in launchers:
             btn = AppButton(app['Name'], app['Exec'], app['Icon'], app['Comment'],panel)
             if not firstApp:
                 firstApp = btn
-            btns.append(btn)
-            i += 1
-            layout.addWidget(btn)
-        # layout.addChildWidget()
+                btns.append(btn)
+                i += 1
+                layout.addWidget(btn)
+                # layout.addChildWidget()
     except Exception, e:
         print app, e
-    
+        
 
 pages[0].setLayout(layout)
 stackedLayout.addWidget(pages[0])
@@ -80,10 +80,10 @@ class WorkThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self.kill = False
-    
+        
     def __del__(self):
         self.quit()
-      
+        
 
     def run(self):
         print "started thread"
@@ -121,7 +121,7 @@ def searchApp(txt):
     txt = str(txt).lower()
     pattern ='.*'+'.*'.join([c for c in txt])
     pattern = re.compile(pattern)
-        # widget =  QWidget()
+    # widget =  QWidget()
     for btn in btns:
         info = btn.name + btn.command + btn.comment
         info = info.lower()
@@ -145,35 +145,14 @@ def updateUI(l):
         firstApp = None
     for item in l:
         layout.addWidget(item)
-    pages[1].setLayout(layout)
-    
+        pages[1].setLayout(layout)
+        
     stackedLayout.addWidget(pages[1])
     # stackedLayout.setSize(pages[1].baseSize())
     # pages[1].setMinimumSize(800,1200)
     stackedLayout.setCurrentWidget(pages[1])
 
 
-class ThreadPool():
-
-    def __init__(self):
-        self.threads = []
-        self.counter = 0
-        
-    
-    def getThread(self):
-        self.threads.append(WorkThread())
-        for thread in self.threads:
-            if thread.isFinished():
-                # thread.wait()
-                print thread.txt
-                # thread = WorkThread()
-                # thread.
-        return self.threads[ -1 ]
-
-    def setTerminateFlag(self):
-        for thread in self.threads:
-            if thread.isRunning():
-                thread.kill = True
 
 
 wks = ThreadPool()
@@ -209,7 +188,7 @@ def searchText(txt):
         # wk.wait()
     # wks.setTerminateFlag()
     wk =  GenericWorker(searchApp,txt)
-   
+    
     
     wk.moveToThread(thread)
     wk.start.emit(txt)
